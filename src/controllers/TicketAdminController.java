@@ -16,10 +16,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import Model.Utilisateur;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -33,7 +45,14 @@ public class TicketAdminController implements Initializable {
      * Initializes the controller class.
      */
 
-  @FXML
+  
+    /**
+     * Initializes the controller class.
+     */
+    @FXML
+    private TextArea Description;
+
+    @FXML
     private BorderPane border;
 
     @FXML
@@ -46,24 +65,222 @@ public class TicketAdminController implements Initializable {
     private TableColumn<Ticket, String> etat;
 
     @FXML
-    private TableColumn<Ticket, String> id;
+    private ComboBox<String> groupeliste;
+
+    @FXML
+    private TableColumn<Ticket,String > idCol;
+
+    @FXML
+    private ComboBox<?> listetech;
 
     @FXML
     private TableColumn<Ticket, String> priorite;
+ @FXML
+    private TableColumn<Ticket, String> responsable;
+    @FXML
+    private ComboBox<String> prioriteform;
 
     @FXML
     private TableView<Ticket> tableticket;
-      @FXML
-    private ComboBox<String> prioriteform;
-    /**
-     * Initializes the controller class.
-     */
       
     private String[] pri ={"faible", "moyenne","urgent"};
     
-    ObservableList<Ticket>list=FXCollections.observableArrayList(
-    new Ticket("id", "description", "priorite", new Date(), "etat")
-    );
+    
+        Connection con;
+    PreparedStatement pst;
+    int myIndex;
+   int id;
+    
+    
+    
+    
+    public void Connect()
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/java_helpdesk","root","");
+            System.out.println("connected succefuly 2");
+        } catch (ClassNotFoundException ex) {
+          
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+      @FXML
+    void Add(ActionEvent event) {
+        
+            String sdescript,stprior,stdatecrea,stetat,stsolu,stdarecloture;
+            sdescript = Description.getText();
+            
+//            mobile = txtMobile.getText();
+//            course = txtCourse.getText();
+        try 
+        {
+            pst = con.prepareStatement("INSERT INTO `ticket`(`description`, `priorite`, `datecreation`, `etat`, `solution`,`responsable`) values(?,?,?,?,?,?)");
+            pst.setString(1, sdescript);
+            if(prioriteform.getSelectionModel().getSelectedItem().toString().equals("Haute")){
+              pst.setString(2,"Haute" );
+            }
+            if(prioriteform.getSelectionModel().getSelectedItem().toString().equals("Moyenne")){
+              pst.setString(2,"Moyenne" );
+            }
+             if(prioriteform.getSelectionModel().getSelectedItem().toString().equals("Faible")){
+              pst.setString(2,"Faible" );
+            }
+            
+            pst.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+             pst.setString(4, "non cloturer");
+               pst.setString(5, "");
+            //   pst.setDate(6, new java.sql.Date(2023, 12, 15));
+
+             if(groupeliste.getSelectionModel().getSelectedItem().toString().equals("software")){
+              pst.setInt(6,1 );
+            }
+             if(groupeliste.getSelectionModel().getSelectedItem().toString().equals("hardware")){
+              pst.setInt(6,2 );
+            }
+            pst.executeUpdate();
+          
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ajout Ticket");
+        
+        alert.setHeaderText("Ticket ajouté");
+        alert.setContentText("Ajouter!");
+        alert.showAndWait();
+         //   table();
+            
+            Description.setText("");
+           // Nom.setText("");
+           // Email.setText("");
+            //Tel.setText("");
+            //Poste.setText("");
+            //Mdp.setText("");      
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(AdminUserController.class.getName()).log(Level.SEVERE, null, ex);
+         //   System.out.println("erreur 5let");
+        }
+    }
+    
+    
+    
+     public void table()
+      {
+          Connect();
+          ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+       try 
+       {
+           pst = con.prepareStatement("SELECT `id`, `description`, `priorite`, `datecreation`, `etat`, `solution`, `datecloture`, `responsable` FROM `ticket`");  
+           ResultSet rs = pst.executeQuery();
+      {
+        while (rs.next())
+        {
+           Ticket st = new Ticket();
+            st.setId(rs.getString("id"));
+           // st.setId("2");
+            st.setDescription(rs.getString("description"));
+            st.setPriorite(rs.getString("priorite"));
+            st.setDatecreation(rs.getDate("datecreation"));
+            st.setEtat(rs.getString("etat"));
+            st.setSolution(rs.getString("solution")); 
+            st.setResponsable(rs.getString("responsable"));
+            //st.setType(rs.getString("type"));
+              
+           
+            tickets.add(st);
+       }
+    } 
+                tableticket.setItems(tickets);
+                idCol.setCellValueFactory(f -> f.getValue().idProperty());
+                
+                description.setCellValueFactory(f -> f.getValue().descriptionProperty());
+                priorite.setCellValueFactory(f -> f.getValue().prioriteProperty());
+                datecreation.setCellValueFactory(f -> f.getValue().datecreationProperty());
+                etat.setCellValueFactory(f -> f.getValue().etatProperty());
+                //responsable.setCellValueFactory(f -> {if(f.getValue().responsableProperty().equals(2))return "hardware";else return "software";});
+    responsable.setCellValueFactory(f -> {
+    // Get the value of the property using getValue() method
+    String propertyValue = f.getValue().responsableProperty().getValue();
+
+    // Replace the condition with your own logic
+    if ("2".equals(propertyValue)) {
+        System.out.println(propertyValue);
+        return new SimpleStringProperty("hardware");
+    } else {
+        System.out.println(propertyValue);
+        return new SimpleStringProperty("software");
+    }
+});
+
+                //CourseColmn.setCellValueFactory(f -> f.getValue().courseProperty());
+                
+               
+       }
+       
+       catch (SQLException ex) 
+       {
+         // Logger.getLogger(AdminUserControllerController.class.getName()).log(Level.SEVERE, null, ex);
+       }
+                tableticket.setRowFactory( tv -> {
+             TableRow<Ticket> myRow = new TableRow<>();
+             myRow.setOnMouseClicked (event -> 
+             {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty()))
+                {
+                    myIndex =  tableticket.getSelectionModel().getSelectedIndex();
+         
+                   id = Integer.parseInt(String.valueOf(tableticket.getItems().get(myIndex).getId()));
+
+                   Description.setText(tableticket.getItems().get(myIndex).getDescription());
+                 //   Prenom.setText(tableuser.getItems().get(myIndex).getPrenom());
+                
+                           
+                         
+                           
+                }
+             });
+                return myRow;
+                   });
+    
+    
+      }
+    
+         @FXML
+    void Delete(ActionEvent event) {
+     myIndex = tableticket.getSelectionModel().getSelectedIndex();
+         
+        id = Integer.parseInt(String.valueOf(tableticket.getItems().get(myIndex).getId()));
+            System.out.println(id);         
+        try 
+        {
+            pst = con.prepareStatement("delete from ticket where id = ? ");
+            pst.setInt(1, id);
+            pst.executeUpdate();
+           
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Suppression ticket");
+        
+        alert.setHeaderText("Suppression ticket");
+        alert.setContentText("Deletedd!");
+        alert.showAndWait();
+                  table();
+        } 
+        catch (SQLException ex)
+        {
+          //  Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+
+    
+    
+    
+    
+   ObservableList listegr=FXCollections.observableArrayList();
+    ObservableList listepr=FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      try {
@@ -75,7 +292,16 @@ public class TicketAdminController implements Initializable {
 
             // Load the FXML file
             Parent sidebar = FXMLLoader.load(getClass().getResource("../views/sidebardashbord.fxml"));
-   
+     listegr.addAll("software","hardware");
+        groupeliste.setItems(listegr);
+     listepr.addAll("Haute","Moyenne","Faible");        
+            prioriteform.setItems(listepr);
+            
+            
+            
+            
+            
+            
             // Check if the loaded sidebar is null
             if (sidebar == null) {
                 System.err.println("FXML file not loaded properly!");
@@ -84,17 +310,11 @@ public class TicketAdminController implements Initializable {
 
             // Set the loaded sidebar as the left element of the BorderPane
            border.setLeft(sidebar);
-           
+           Connect();
+           table();
           
             
             
-            id.setCellValueFactory(new PropertyValueFactory<Ticket,String>("id"));
-             description.setCellValueFactory(new PropertyValueFactory<Ticket, String>("description"));
-              priorite.setCellValueFactory(new PropertyValueFactory<Ticket, String>("priorite"));
-               etat.setCellValueFactory(new PropertyValueFactory<Ticket, String>("etat"));
-                datecreation.setCellValueFactory(new PropertyValueFactory<Ticket, Date>("datecreation"));
-               
-            tableticket.setItems(list);
             
             //prioriteform.getItems().addAll(pri); 
           

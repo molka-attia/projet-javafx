@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controllers.DashbordAdminController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashbordAdminController">
     <stylesheets>
         <URL value="@dashbordadmin.css" />
       
@@ -36,7 +36,7 @@
                               <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="40.0" layoutY="65.0" text="50" textFill="#2262c6">
+                        <Label fx:id="nbrusers" layoutX="40.0" layoutY="65.0" text="50" textFill="#2262c6">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -62,7 +62,7 @@
                               <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="43.0" layoutY="65.0" text="6" textFill="#2262c6">
+                        <Label fx:id="nbrtechnicien" layoutX="43.0" layoutY="65.0" text="6" textFill="#2262c6">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -88,7 +88,7 @@
                               <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="33.0" layoutY="64.0" text="3" textFill="#2262c6">
+                        <Label fx:id="nbrticket" layoutX="33.0" layoutY="64.0" text="3" textFill="#2262c6">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -100,21 +100,21 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <TableView layoutX="38.0" layoutY="276.0" prefHeight="200.0" prefWidth="399.0">
+                    <TableView fx:id="tableticket" layoutX="38.0" layoutY="276.0" prefHeight="200.0" prefWidth="399.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Nom" />
-                      <TableColumn prefWidth="195.99999237060547" text="Progrès" />
-                        <TableColumn prefWidth="128.0" text="Tickets non clôturé" />
+                      <TableColumn fx:id="description" prefWidth="185.60004425048828" text="Description" />
+                        <TableColumn fx:id="priorite" prefWidth="90.39996337890625" text="Priorité" />
+                        <TableColumn fx:id="responsable" prefWidth="123.20001220703125" text="Résponsable" />
                     </columns>
                   </TableView>
-                  <Label alignment="CENTER" layoutX="83.0" layoutY="235.0" prefHeight="30.0" prefWidth="86.0" styleClass="labbtn" text="Groupes" textFill="#2262c6">
+                  <Label alignment="CENTER" layoutX="83.0" layoutY="235.0" prefHeight="30.0" prefWidth="191.0" styleClass="labbtn" text="Tickets ajoutés aujourd'hui" textFill="#2262c6">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Label>
                   <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="47.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/icons8-team-48.png" />
+                        <Image url="@../images/icons8-today-48.png" />
                      </image>
                   </ImageView>
                   <AnchorPane layoutX="462.0" layoutY="276.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #AEB2C3;">

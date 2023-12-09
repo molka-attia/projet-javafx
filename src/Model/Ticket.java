@@ -5,150 +5,139 @@
 package Model;
 
 import java.util.Date;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author molka
  */
 public class Ticket {
-    private String id;
-    private String description;
-    private String priorite;
-    private Date datecreation;
-    private String etat;
-    private String solution;
-    private Date Datecloturation;
+    private StringProperty id;
+    private StringProperty description;
+    private StringProperty priorite;
+    private SimpleObjectProperty<Date> datecreation;
+    private StringProperty etat;
+    private StringProperty solution;
+    private SimpleObjectProperty<Date> datecloture;
+     private StringProperty responsable;
 
 
     public Ticket() {
+            this.id = new SimpleStringProperty(this, "id");
+        this.description = new SimpleStringProperty(this, "description");
+        this.priorite = new SimpleStringProperty(this, "priorite");
+        this.datecreation = new SimpleObjectProperty<>(this, "datecreation");
+        this.etat = new SimpleStringProperty(this, "etat");
+        this.solution = new SimpleStringProperty(this, "solution");
+        this.datecloture = new SimpleObjectProperty<>(this, "dateCloture");
+        this.responsable = new SimpleStringProperty(this, "responsable");
     }
 
-    public Ticket(String id, String description, String priorite, Date datecreation, String etat, String solution) {
-        this.id = id;
-        this.description = description;
-        this.priorite = priorite;
-        this.datecreation = datecreation;
-        this.etat = etat;
-        this.solution = solution;
+    public Ticket(StringProperty id, StringProperty description, StringProperty priorite, SimpleObjectProperty<Date> datecreation, StringProperty etat, StringProperty solution, SimpleObjectProperty<Date> datecloture) {
+        this.id = new SimpleStringProperty(this, "id");
+        this.description = new SimpleStringProperty(this, "description");
+        this.priorite = new SimpleStringProperty(this, "priorite");
+        this.datecreation = new SimpleObjectProperty<>(this, "datecreation");
+        this.etat = new SimpleStringProperty(this, "etat");
+        this.solution = new SimpleStringProperty(this, "solution");
+        this.datecloture = new SimpleObjectProperty<>(this, "dateCloture");
     }
+public StringProperty idProperty() {
+    return id;
+}
 
-    public Ticket(String id, String description, String priorite, Date datecreation, String etat) {
-        this.id = id;
-        this.description = description;
-        this.priorite = priorite;
-        this.datecreation = datecreation;
-        this.etat = etat;
-        this.solution = "";
-    }
+public String getId() {
+    return id.get();
+}
+
+public void setId(String newId) {
+    id.set(newId);
+}
+
+public StringProperty descriptionProperty() {
+    return description;
+}
+
+public String getDescription() {
+    return description.get();
+}
+
+public void setDescription(String newDescription) {
+    description.set(newDescription);
+}
+
+public StringProperty prioriteProperty() {
+    return priorite;
+}
+
+public String getPriorite() {
+    return priorite.get();
+}
+
+public void setPriorite(String newPriorite) {
+    priorite.set(newPriorite);
+}
+
+public StringProperty etatProperty() {
+    return etat;
+}
+
+public String getEtat() {
+    return etat.get();
+}
+
+public void setEtat(String newEtat) {
+    etat.set(newEtat);
+}
+
+public StringProperty solutionProperty() {
+    return solution;
+}
+
+public String getSolution() {
+    return solution.get();
+}
+
+public void setSolution(String newSolution) {
+    solution.set(newSolution);
+}
 
     
-    
-    
-    public void cloturer(){
-        setDatecloturation(new Date());
-    }
-    
-   
-    
-    
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
+  public SimpleObjectProperty<Date> datecreationProperty() {
+    return datecreation;
+}
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
+public Date getDatecreation() {
+    return datecreation.get();
+}
 
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
+public void setDatecreation(Date newDatecreation) {
+    datecreation.set(newDatecreation);
+}
 
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+public SimpleObjectProperty<Date> dateClotureProperty() {
+    return datecloture;
+}
 
-    /**
-     * @return the priorite
-     */
-    public String getPriorite() {
-        return priorite;
-    }
+public Date getDateCloture() {
+    return datecloture.get();
+}
 
-    /**
-     * @param priorite the priorite to set
-     */
-    public void setPriorite(String priorite) {
-        this.priorite = priorite;
-    }
+public void setDateCloture(Date newDateCloture) {
+    datecloture.set(newDateCloture);
+}
+  
+public StringProperty responsableProperty() {
+    return responsable;
+}
 
-    /**
-     * @return the datecreation
-     */
-    public Date getDatecreation() {
-        return datecreation;
-    }
+public String getResponsable() {
+    return responsable.get();
+}
 
-    /**
-     * @param datecreation the datecreation to set
-     */
-    public void setDatecreation(Date datecreation) {
-        this.datecreation = datecreation;
-    }
-
-    /**
-     * @return the etat
-     */
-    public String getEtat() {
-        return etat;
-    }
-
-    /**
-     * @param etat the etat to set
-     */
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-
-    /**
-     * @return the solution
-     */
-    public String getSolution() {
-        return solution;
-    }
-
-    /**
-     * @param solution the solution to set
-     */
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
-
-    /**
-     * @return the Datecloturation
-     */
-    public Date getDatecloturation() {
-        return Datecloturation;
-    }
-
-    /**
-     * @param Datecloturation the Datecloturation to set
-     */
-    public void setDatecloturation(Date Datecloturation) {
-        this.Datecloturation = Datecloturation;
-    }
-    
-    
-    
+public void setResponsable(String newResponsable) {
+    responsable.set(newResponsable);
+}    
 }

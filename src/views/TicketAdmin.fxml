@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controllers.TicketAdminController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TicketAdminController">
    <stylesheets>
         <URL value="@dashbordadmin.css" />
       
@@ -25,11 +25,12 @@
                <children>
                   <TableView fx:id="tableticket" layoutX="47.0" layoutY="96.0" prefHeight="200.0" prefWidth="630.0">
                     <columns>
-                      <TableColumn fx:id="id" prefWidth="44.799957275390625" text="id" />
+                      <TableColumn fx:id="idCol" prefWidth="44.799957275390625" text="id" />
                       <TableColumn fx:id="description" prefWidth="198.40001678466797" text="Description" />
                         <TableColumn fx:id="priorite" prefWidth="100.0" text="Priorité" />
-                        <TableColumn fx:id="datecreation" minWidth="7.199951171875" prefWidth="184.80001831054688" text="Date Création" />
-                        <TableColumn fx:id="etat" prefWidth="105.60003662109375" text="Etat" />
+                        <TableColumn fx:id="datecreation" minWidth="7.199951171875" prefWidth="120.0" text="Date Création" />
+                        <TableColumn fx:id="etat" prefWidth="73.60000610351562" text="Etat" />
+                        <TableColumn fx:id="responsable" prefWidth="92.800048828125" text="Résponsable" />
                     </columns>
                   </TableView>
                   <Label alignment="CENTER" layoutX="95.0" layoutY="46.0" prefHeight="30.0" prefWidth="195.0" styleClass="labbtn" text="Liste des tickets non cloturés" textFill="#2262c6">
@@ -54,18 +55,11 @@
                               <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="397.0" layoutY="129.0" mnemonicParsing="false" text="Ajouter" />
-                        <Button layoutX="465.0" layoutY="129.0" mnemonicParsing="false" text="Modifier" />
-                        <Button layoutX="540.0" layoutY="129.0" mnemonicParsing="false" text="Supprimer" />
-                        <TextArea layoutX="24.0" layoutY="42.0" prefHeight="55.0" prefWidth="238.0" />
+                        <Button layoutX="473.0" layoutY="129.0" mnemonicParsing="false" onAction="#Add" text="Ajouter" />
+                        <Button layoutX="540.0" layoutY="129.0" mnemonicParsing="false" onAction="#Delete" text="Supprimer" />
+                        <TextArea fx:id="Description" layoutX="24.0" layoutY="42.0" prefHeight="55.0" prefWidth="238.0" />
                         <ComboBox fx:id="prioriteform" layoutX="274.0" layoutY="42.0" prefWidth="150.0" />
-                        <ComboBox layoutX="438.0" layoutY="42.0" prefWidth="150.0" />
-                        <ComboBox layoutX="111.0" layoutY="116.0" prefWidth="150.0" />
-                        <Label alignment="CENTER" layoutX="22.0" layoutY="113.0" prefHeight="30.0" prefWidth="90.0" styleClass="labbtn" text="Affecter">
-                           <font>
-                              <Font name="Berlin Sans FB" size="14.0" />
-                           </font>
-                        </Label>
+                        <ComboBox fx:id="groupeliste" layoutX="438.0" layoutY="42.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                   <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="47.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">

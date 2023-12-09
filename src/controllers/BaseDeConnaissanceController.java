@@ -21,6 +21,53 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
+import javafx.scene.layout.BorderPane;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
+import Model.Utilisateur;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 /**
@@ -31,41 +78,159 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class BaseDeConnaissanceController implements Initializable {
 
    
-  @FXML
+   @FXML
+    private TextArea Description;
+
+    @FXML
     private BorderPane border;
 
     @FXML
     private TableColumn<Ticket, Date> datecreation;
+    
+     @FXML
+    private TableColumn<Ticket, Date> datecloture;
+     
+      
+     @FXML
+    private TableColumn<Ticket, String> solution;
 
     @FXML
     private TableColumn<Ticket, String> description;
 
+    @FXML
+    private TableColumn<Ticket, String> etat;
 
+    
 
     @FXML
-    private TableColumn<Ticket, String> id;
+    private TableColumn<Ticket,String > idCol;
+
 
     @FXML
     private TableColumn<Ticket, String> priorite;
-    
-        @FXML
-    private TableColumn<Ticket, String> solution;
-        
-          @FXML
-    private TableColumn<Ticket, Date> Datecloturation;
+ @FXML
+    private TableColumn<Ticket, String> responsable;
+  
 
     @FXML
     private TableView<Ticket> tableticket;
-     
-    /**
-     * Initializes the controller class.
-     */
       
-  
+ 
     
-    ObservableList<Ticket>list=FXCollections.observableArrayList(
-    new Ticket("id", "description", "priorite", new Date(), "cloturé","solution est")
-    );
+    
+        Connection con;
+    PreparedStatement pst;
+    int myIndex;
+   int id;
+    
+    
+    
+    
+    public void Connect()
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/java_helpdesk","root","");
+            System.out.println("connected succefuly 2");
+        } catch (ClassNotFoundException ex) {
+          
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+     public void table()
+      {
+          Connect();
+          ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+       try 
+       {
+           pst = con.prepareStatement("SELECT  `description`, `priorite`, `datecreation`, `solution`, `datecloture`, `responsable` FROM `ticket`");  
+           ResultSet rs = pst.executeQuery();
+      {
+        while (rs.next())
+        {
+           Ticket st = new Ticket();
+         //   st.setId(rs.getString("id"));
+           // st.setId("2");
+            st.setDescription(rs.getString("description"));
+            st.setPriorite(rs.getString("priorite"));
+            st.setDatecreation(rs.getDate("datecreation"));
+           // st.setEtat(rs.getString("etat"));
+            st.setSolution(rs.getString("solution")); 
+            st.setDateCloture(rs.getDate("datecloture"));
+            st.setResponsable(rs.getString("responsable"));
+            //st.setType(rs.getString("type"));
+              
+           
+            tickets.add(st);
+       }
+    } 
+                tableticket.setItems(tickets);
+              //  idCol.setCellValueFactory(f -> f.getValue().idProperty());
+                
+                description.setCellValueFactory(f -> f.getValue().descriptionProperty());
+                priorite.setCellValueFactory(f -> f.getValue().prioriteProperty());
+                datecreation.setCellValueFactory(f -> f.getValue().datecreationProperty());
+                
+                solution.setCellValueFactory(f -> f.getValue().solutionProperty());
+                //responsable.setCellValueFactory(f -> {if(f.getValue().responsableProperty().equals(2))return "hardware";else return "software";});
+    datecloture.setCellValueFactory(f -> f.getValue().dateClotureProperty());
+                responsable.setCellValueFactory(f -> {
+    // Get the value of the property using getValue() method
+    String propertyValue = f.getValue().responsableProperty().getValue();
+
+    // Replace the condition with your own logic
+    if ("2".equals(propertyValue)) {
+        System.out.println(propertyValue);
+        return new SimpleStringProperty("hardware");
+    } else {
+        System.out.println(propertyValue);
+        return new SimpleStringProperty("software");
+    }
+});
+
+               // CourseColmn.setCellValueFactory(f -> f.getValue().courseProperty());
+                
+               
+       }
+       
+       catch (SQLException ex) 
+       {
+         // Logger.getLogger(AdminUserControllerController.class.getName()).log(Level.SEVERE, null, ex);
+       }
+                tableticket.setRowFactory( tv -> {
+             TableRow<Ticket> myRow = new TableRow<>();
+             myRow.setOnMouseClicked (event -> 
+             {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty()))
+                {
+                    myIndex =  tableticket.getSelectionModel().getSelectedIndex();
+         
+                   id = Integer.parseInt(String.valueOf(tableticket.getItems().get(myIndex).getId()));
+
+                   Description.setText(tableticket.getItems().get(myIndex).getDescription());
+                 //   Prenom.setText(tableuser.getItems().get(myIndex).getPrenom());
+                
+                           
+                         
+                           
+                }
+             });
+                return myRow;
+                   });
+    
+    
+      }
+    
+       
+    
+
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      try {
@@ -77,7 +242,13 @@ public class BaseDeConnaissanceController implements Initializable {
 
             // Load the FXML file
             Parent sidebar = FXMLLoader.load(getClass().getResource("../views/sidebardashbord.fxml"));
-   
+  
+            
+            
+            
+            
+            
+            
             // Check if the loaded sidebar is null
             if (sidebar == null) {
                 System.err.println("FXML file not loaded properly!");
@@ -86,18 +257,11 @@ public class BaseDeConnaissanceController implements Initializable {
 
             // Set the loaded sidebar as the left element of the BorderPane
            border.setLeft(sidebar);
-           
+           Connect();
+           table();
           
             
             
-            id.setCellValueFactory(new PropertyValueFactory<Ticket,String>("id"));
-             description.setCellValueFactory(new PropertyValueFactory<Ticket, String>("description"));
-              priorite.setCellValueFactory(new PropertyValueFactory<Ticket, String>("priorite"));
-                solution.setCellValueFactory(new PropertyValueFactory<Ticket, String>("solution"));
-                datecreation.setCellValueFactory(new PropertyValueFactory<Ticket, Date>("datecreation"));
-                Datecloturation.setCellValueFactory(new PropertyValueFactory<Ticket, Date>("Datecloturation"));
-                
-            tableticket.setItems(list);
             
             //prioriteform.getItems().addAll(pri); 
           

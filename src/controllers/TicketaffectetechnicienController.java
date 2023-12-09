@@ -60,9 +60,9 @@ public class TicketaffectetechnicienController implements Initializable {
       
     private String[] pri ={"faible", "moyenne","urgent"};
     
-    ObservableList<Ticket>list=FXCollections.observableArrayList(
-    new Ticket("id", "description", "priorite", new Date(), "etat")
-    );
+//    ObservableList<Ticket>list=FXCollections.observableArrayList(
+//    new Ticket("id", "description", "priorite", new Date(), "etat")
+//    );
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      try {
@@ -86,14 +86,14 @@ public class TicketaffectetechnicienController implements Initializable {
            
           
             
-            
-            id.setCellValueFactory(new PropertyValueFactory<Ticket,String>("id"));
-             description.setCellValueFactory(new PropertyValueFactory<Ticket, String>("description"));
-              priorite.setCellValueFactory(new PropertyValueFactory<Ticket, String>("priorite"));
-               etat.setCellValueFactory(new PropertyValueFactory<Ticket, String>("etat"));
-                datecreation.setCellValueFactory(new PropertyValueFactory<Ticket, Date>("datecreation"));
-               
-            tableticket.setItems(list);
+//            
+//            id.setCellValueFactory(new PropertyValueFactory<Ticket,String>("id"));
+//             description.setCellValueFactory(new PropertyValueFactory<Ticket, String>("description"));
+//              priorite.setCellValueFactory(new PropertyValueFactory<Ticket, String>("priorite"));
+//               etat.setCellValueFactory(new PropertyValueFactory<Ticket, String>("etat"));
+//                datecreation.setCellValueFactory(new PropertyValueFactory<Ticket, Date>("datecreation"));
+//               
+//            tableticket.setItems(list);
             
             //prioriteform.getItems().addAll(pri); 
           

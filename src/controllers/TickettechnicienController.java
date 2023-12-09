@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package controllers;
+
+import Model.Technicien;
 import Model.Ticket;
 import java.io.IOException;
 import java.net.URL;
@@ -26,8 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  * @author molka
  */
-public class TicketUtilisateurController implements Initializable {
-
+public class TickettechnicienController implements Initializable {
   @FXML
     private BorderPane border;
 
@@ -69,7 +70,7 @@ public class TicketUtilisateurController implements Initializable {
             }
 
             // Load the FXML file
-            Parent sidebar = FXMLLoader.load(getClass().getResource("../views/sidebardashbordutilisateur.fxml"));
+            Parent sidebar = FXMLLoader.load(getClass().getResource("../views/sidebardashbordtechnicien.fxml"));
    
             // Check if the loaded sidebar is null
             if (sidebar == null) {
@@ -99,6 +100,5 @@ public class TicketUtilisateurController implements Initializable {
         }
     }
 }
-
 
 

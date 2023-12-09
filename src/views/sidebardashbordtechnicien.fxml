@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,17 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="200.0" styleClass="sidebar" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controllers.SidebardashbordtechnicienController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="200.0" styleClass="sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SidebardashbordtechnicienController">
 <children>
-      <Pane layoutX="22.0" layoutY="30.0">
-         <children>
-            <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="150.0" styleClass="labbtn" text="Helpdesk">
-               <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Pane layoutX="22.0" layoutY="30.0" />
       <HBox layoutX="25.0" layoutY="91.0" prefHeight="30.0" prefWidth="144.0">
          <children>
             <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -28,11 +19,7 @@
                   <Image url="@../images/icons8-ticket-50.png" />
                </image>
             </ImageView>
-            <Label id="Utilisateurs" text="Tickets attribués" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Label>
+            <Button fx:id="ticketAttTech" mnemonicParsing="false" onAction="#OpenTicketAttTech" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Tickets attribués" textFill="WHITE" />
          </children>
       </HBox>
       <HBox layoutX="25.0" layoutY="125.0" prefHeight="30.0" prefWidth="144.0">
@@ -42,11 +29,7 @@
                   <Image url="@../images/icons8-ticket-50.png" />
                </image>
             </ImageView>
-            <Label text="Tickets" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Label>
+            <Button fx:id="ticketTech" mnemonicParsing="false" onAction="#OpenTicketTech" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Tickets" textFill="WHITE" />
          </children>
       </HBox>
       <HBox layoutX="25.0" layoutY="161.0" prefHeight="30.0" prefWidth="144.0" />
@@ -58,13 +41,15 @@
                   <Image url="@../images/icons8-archive-49%20(1).png" />
                </image>
             </ImageView>
-            <Label prefHeight="18.0" prefWidth="162.0" text="Base de connaissance" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Label>
+            <Button fx:id="baseDeConnaissanceTech" mnemonicParsing="false" onAction="#OpenBaseDeConnaissanceTech" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Base de connaissance" textFill="WHITE" />
          </children>
       </HBox>
+      <Button fx:id="sedeconnecterTech" layoutX="104.0" layoutY="561.0" mnemonicParsing="false" onAction="#OpensedeconnecterTech" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" text="Se déconnecter" textFill="WHITE" />
+      <Button fx:id="helpdesk1" layoutX="24.0" layoutY="30.0" mnemonicParsing="false" onAction="#openhelpdesk1" prefHeight="30.0" prefWidth="151.0" styleClass="labbtn" text="Helpdesk">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Button>
    </children>
    <stylesheets>
       <URL value="@stylesheet.css" />

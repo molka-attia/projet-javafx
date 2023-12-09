@@ -4,166 +4,148 @@
  */
 package Model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author molka
  */
 public class Utilisateur {
-    private String id;
-    private String nom;
-    private String prenom;
-    private String email;
-    private String password;
-    private String tel;
-    private String poste;
-    private String type;
-    private String user_img;
+       private StringProperty id;
+    private StringProperty nom;
+    private StringProperty prenom;
+    private StringProperty email;
+    private StringProperty password;
+    private StringProperty tel;
+    private StringProperty poste;
+    private StringProperty type;
+    //private StringProperty user_img;
+
+    public Utilisateur(StringProperty id, StringProperty nom, StringProperty prenom, StringProperty email, StringProperty password, StringProperty tel, StringProperty poste, StringProperty type) {
+        this.id = new SimpleStringProperty(this, "id");
+        this.nom = new SimpleStringProperty(this, "nom");
+        this.prenom = new SimpleStringProperty(this, "prenom");
+        this.email = new SimpleStringProperty(this, "email");
+        this.password = new SimpleStringProperty(this, "password");
+        this.tel = new SimpleStringProperty(this, "tel");
+        this.poste = new SimpleStringProperty(this, "poste");
+        this.type = new SimpleStringProperty(this, "type");
+       // this.user_img = user_img;
+  
+    
+    }
 
     public Utilisateur() {
+         this.id = new SimpleStringProperty(this, "id");
+        this.nom = new SimpleStringProperty(this, "nom");
+        this.prenom = new SimpleStringProperty(this, "prenom");
+        this.email = new SimpleStringProperty(this, "email");
+        this.password = new SimpleStringProperty(this, "password");
+        this.tel = new SimpleStringProperty(this, "tel");
+        this.poste = new SimpleStringProperty(this, "poste");
+        this.type = new SimpleStringProperty(this, "type");
     }
 
-    public Utilisateur(String id, String nom, String prenom, String email, String password, String tel, String poste, String type, String user_img) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.password = password;
-        this.tel = tel;
-        this.poste = poste;
-        this.type = type;
-        this.user_img = user_img;
-    }
     
     /**
      * @return the id
      */
-    public String getId() {
+    
+  public StringProperty idProperty() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
+    public String getId() {
+        return id.get();
     }
 
-    /**
-     * @return the nom
-     */
-    public String getNom() {
+    public void setId(String newId) {
+        id.set(newId);
+    }
+
+    public StringProperty nomProperty() {
         return nom;
     }
 
-    /**
-     * @param nom the nom to set
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getNom() {
+        return nom.get();
     }
 
-    /**
-     * @return the prenom
-     */
-    public String getPrenom() {
+    public void setNom(String newNom) {
+        nom.set(newNom);
+    }
+
+    public StringProperty prenomProperty() {
         return prenom;
     }
 
-    /**
-     * @param prenom the prenom to set
-     */
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public String getPrenom() {
+        return prenom.get();
     }
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
+    public void setPrenom(String newPrenom) {
+        prenom.set(newPrenom);
+    }
+
+    public StringProperty emailProperty() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmail() {
+        return email.get();
     }
 
-    /**
-     * @return the password
-     */
-    public String getPassword() {
+    public void setEmail(String newEmail) {
+        email.set(newEmail);
+    }
+
+    public StringProperty passwordProperty() {
         return password;
     }
 
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPassword() {
+        return password.get();
     }
 
-    /**
-     * @return the tel
-     */
-    public String getTel() {
+    public void setPassword(String newPassword) {
+        password.set(newPassword);
+    }
+
+    public StringProperty telProperty() {
         return tel;
     }
 
-    /**
-     * @param tel the tel to set
-     */
-    public void setTel(String tel) {
-        this.tel = tel;
+    public String getTel() {
+        return tel.get();
     }
 
-    /**
-     * @return the poste
-     */
-    public String getPoste() {
+    public void setTel(String newTel) {
+        tel.set(newTel);
+    }
+
+    public StringProperty posteProperty() {
         return poste;
     }
 
-    /**
-     * @param poste the poste to set
-     */
-    public void setPoste(String poste) {
-        this.poste = poste;
+    public String getPoste() {
+        return poste.get();
     }
 
-    /**
-     * @return the type
-     */
-    public String getType() {
+    public void setPoste(String newPoste) {
+        poste.set(newPoste);
+    }
+
+    public StringProperty typeProperty() {
         return type;
     }
 
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
+    public String getType() {
+        return type.get();
     }
 
-    /**
-     * @return the user_img
-     */
-    public String getUser_img() {
-        return user_img;
+    public void setType(String newType) {
+        type.set(newType);
     }
-
-    /**
-     * @param user_img the user_img to set
-     */
-    public void setUser_img(String user_img) {
-        this.user_img = user_img;
-    }
-
-    @Override
-    public String toString() {
-        return " "+id; 
-    }
+}  
     
-    
-}
