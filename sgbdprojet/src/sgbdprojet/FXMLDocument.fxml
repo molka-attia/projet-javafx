@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbdprojet.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <AnchorPane prefHeight="600.0" prefWidth="200.0" styleClass="sidebar">
+         <children>
+            <Pane layoutX="22.0" layoutY="30.0" />
+            <HBox layoutX="25.0" layoutY="91.0" prefHeight="30.0" prefWidth="144.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-product-50.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="utilisateur" mnemonicParsing="false" onAction="#OpenUtilisateur" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Articles" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="125.0" prefHeight="30.0" prefWidth="144.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-buying-50.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="techniciens" mnemonicParsing="false" onAction="#OpenTechniciens" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Commandes" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="161.0" prefHeight="30.0" prefWidth="144.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-budget-50.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="groupes" mnemonicParsing="false" onAction="#OpenGroupes" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" styleClass="signupBtn" text="Livraisons" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox layoutX="21.0" layoutY="233.0" prefHeight="30.0" prefWidth="157.0" />
+            <Button fx:id="sedeconnecter" layoutX="100.0" layoutY="561.0" mnemonicParsing="false" onAction="#Opensedeconnecter" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0px 0px  0px  0px;" text="Se déconnecter" textFill="WHITE" />
+            <Button fx:id="helpdesk" layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#openhelpdesk" prefHeight="30.0" prefWidth="151.0" styleClass="labbtn" text="Bienvenu">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <stylesheets>
+            <URL value="@stylesheet.css" />
+            <URL value="@stylesheet/stylesheet.css" />
+         </stylesheets>
+      </AnchorPane>
+      <AnchorPane layoutX="204.0" layoutY="81.0" prefHeight="90.0" prefWidth="195.0" style="-fx-border-radius: 0px 50px 0px 0px; -fx-border-color: #AEB2C3;">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7176470756530762" green="0.7372549176216125" blue="0.7372549176216125" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="58.0" prefHeight="30.0" prefWidth="86.0" styleClass="labbtn" text="Utilisateurs" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="nbrusers" layoutX="40.0" layoutY="65.0" text="50" textFill="#2262c6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="64.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-fast-cart-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="607.0" layoutY="83.0" prefHeight="90.0" prefWidth="185.0" style="-fx-border-radius: 0px 50px 0px 0px; -fx-border-color: #AEB2C3;">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7176470756530762" green="0.7372549176216125" blue="0.7372549176216125" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="58.0" prefHeight="30.0" prefWidth="86.0" styleClass="labbtn" text="Techniciens" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="nbrtechnicien" layoutX="43.0" layoutY="65.0" text="6" textFill="#2262c6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-supplier-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="408.0" layoutY="82.0" prefHeight="90.0" prefWidth="195.0" style="-fx-border-radius: 0px 50px 0px 0px; -fx-border-color: #AEB2C3;">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7176470756530762" green="0.7372549176216125" blue="0.7372549176216125" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" layoutX="48.0" layoutY="57.0" prefHeight="30.0" prefWidth="116.0" styleClass="labbtn" text="Tickets non Cloturer" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="nbrticket" layoutX="33.0" layoutY="64.0" text="3" textFill="#2262c6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="63.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-fast-cart-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tableticket" layoutX="203.0" layoutY="261.0" prefHeight="200.0" prefWidth="390.0">
+         <columns>
+            <TableColumn fx:id="description" prefWidth="185.60004425048828" text="Description" />
+            <TableColumn fx:id="priorite" prefWidth="90.39996337890625" text="Priorité" />
+            <TableColumn fx:id="responsable" prefWidth="123.20001220703125" text="Résponsable" />
+         </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="260.0" layoutY="217.0" prefHeight="30.0" prefWidth="200.0" styleClass="labbtn" text="Commandes ajoutés aujourd'hui" textFill="#2262c6">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="213.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Helpdesk-ticket/src/images/icons8-today-48.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="602.0" layoutY="260.0" prefHeight="200.0" prefWidth="151.0" style="-fx-border-color: #AEB2C3;">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="110.0" layoutX="63.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Helpdesk-ticket/src/images/user.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="55.0" layoutY="100.0" prefHeight="18.0" prefWidth="86.0" text="ATTIA MOLKA">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="143.0" text="TEL:">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="139.0" text="55056554" />
+            <Label layoutX="19.0" layoutY="161.0" prefHeight="18.0" prefWidth="46.0" text="EMAIL:" />
+            <Label layoutX="61.0" layoutY="160.0" text="molkaattia3@gmail.com" />
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
